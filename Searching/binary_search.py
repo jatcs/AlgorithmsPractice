@@ -16,9 +16,13 @@ class Solution:
             return middle_index
         # since our sentinel is negative...
         # any "found" index (>=) would be the result
+        #   attempt 2 - add on the middle_index to the "return" value 
+        #   so it doesn't lose track of what indexes it just came from
+        # ------ ^ worked in case where the value did exist
+        # ------   but not when the value didn't exist.
         return max(
             self.search(nums[0:middle_index], target),
-            self.search(nums[middle_index:], target)
+            middle_index + self.search(nums[middle_index:], target)
         )
 
 class SearchTester:
